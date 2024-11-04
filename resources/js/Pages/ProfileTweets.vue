@@ -21,7 +21,7 @@ const form = useForm({
 
             </ProfileHeaderComponent>
 
-            <div class="mt-6 bg-black shadow-sm rounded-lg divide-y block">
+            <div class="mt-6 shadow-sm rounded-lg divide-y block">
                 <Tweet
                     v-for="tweet in tweets"
                     :key="tweet.id"

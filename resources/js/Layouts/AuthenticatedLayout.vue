@@ -12,7 +12,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div class="min-h-screen bg-slate-800 flex h-screen">
+    <div class="min-h-screen flex h-screen">
         <nav
         >
             <!-- Primary Navigation Menu -->
@@ -67,7 +67,7 @@ const showingNavigationDropdown = ref(false);
 
         <!-- Page Heading -->
         <header
-            class="bg-slate-900 shadow"
+            class="shadow"
             v-if="$slots.header"
         >
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

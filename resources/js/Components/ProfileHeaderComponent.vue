@@ -17,8 +17,8 @@
         <!-- Main info -->
          <div class="w-full bg-black block pt-24 pb-10 px-10 text-gray-400">
             <h1 class="text-3xl font-extrabold text-white">Oraz Norlan</h1>
-            <p class="mt-2 text-xs">@Username1488</p>
-            <span class="mt-2 text-sm">Joined 2st September</span>
+            <p class="mt-2 text-xs">@Username4308</p>
+            <span class="mt-2 text-sm">Joined on November 3rd</span>
             <div class="flex mt-2">
                 <div>
                     <span class="text-white mr-1">1</span> following

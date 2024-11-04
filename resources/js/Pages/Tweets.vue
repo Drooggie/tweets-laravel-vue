@@ -27,7 +27,7 @@ const form = useForm({
                 <PrimaryButton class="mt-4">Chirp</PrimaryButton>
             </form>
 
-            <div class="mt-6 bg-black shadow-sm rounded-lg divide-y">
+            <div class="mt-6 divide-y">
                 <Tweet
                     v-for="tweet in tweets"
                     :key="tweet.id"

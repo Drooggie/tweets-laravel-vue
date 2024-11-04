@@ -21,7 +21,7 @@ const editing = ref(false);
 
 
 <template>
-    <div class="p-6 flex space-x-2 block ">
+    <div class="p-6 flex space-x-2 blocks bg-black my-5 rounded-md">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-200 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
@@ -58,7 +58,20 @@ const editing = ref(false);
                     <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
                 </div>
             </form>
-            <p class="mt-4 text-lg text-white">{{ tweet.message }}</p>
+            <p class="mt-4 text-lg text-white pt-2">{{ tweet.message }}</p>
+
+            <!-- likes  -->
+            <div class="flex">
+                <div class="mt-5 text-white flex ml-auto justify-center">
+                    <span class="fas fa-like">
+                    <svg class="h-6 w-6"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
+                    </span>
+                    <span
+                        class="text-xl flex-1 ml-2"
+                    >{{ tweet.likes }}</span>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>

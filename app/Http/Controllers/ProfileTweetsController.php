@@ -13,8 +13,25 @@ class ProfileTweetsController extends Controller
 {
     public function index(User $user): Response
     {
+        // $tweet = new Tweet();
+        // $tweet->id = 2;
+        // $tweet->user_id = 1;
+        // $tweet->message = 'Creating from code';
+        // $tweet->likes = 0;
+        // $tweet->created_at = '2024-11-04 15:57:32';
+        // $tweet->updated_at = '2024-11-04 15:57:32';
+        // $tweet = new Tweet([
+        //     // 'id' => 3,
+        //     "user_id" => 1,
+        //     'message' => 'message',
+        //     // 'likes' => 0,
+        //     // 'created_at' => '2024-11-04 15:57:32',
+        //     // 'updated_at' => '2024-11-04 15:57:32'
+        // ]);
+        // $tweet->save();
+
         return Inertia::render('ProfileTweets', [
-            'tweets' => Tweet::with('user:id, name')->where('user_id', Auth::id())->latest()->get()
+            'tweets' => Tweet::with('user')->where('user_id', Auth::id())->latest()->get()
         ]);
     }
 }

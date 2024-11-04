@@ -28,7 +28,7 @@ const form = useForm({
             </form>
 
             <div class="mt-6 bg-black shadow-sm rounded-lg divide-y">
-                <Tweet 
+                <Tweet
                     v-for="tweet in tweets"
                     :key="tweet.id"
                     :tweet="tweet"

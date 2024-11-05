@@ -52,8 +52,8 @@ const editing = ref(false);
             </div>
             <form v-if="editing" @submit.prevent="form.put(route('tweets.update', tweet.id), {onSuccess: () => editing = false})">
                 <textarea v-model="form.message" class="mt-4 w-full text-white border-gray-600 bg-slate-900 focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm placeholder-white"></textarea>
-                <InputError :message="form.errors.message" class="mt-2" />
                 <div class="space-x-2">
+                    <InputError :message="form.errors.message" class="mt-2" />
                     <PrimaryButton class="mt-4">Save</PrimaryButton>
                     <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
                 </div>

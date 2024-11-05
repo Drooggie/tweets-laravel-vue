@@ -8,16 +8,23 @@ use Inertia\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Resources\TweetResource;
 
 class TweetController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request)
     {
+        $tweets_data = Tweet::orderBy('created_at', 'DESC')->with('user')->paginate(20);
+
+        if ($request->wantsJson()) {
+            return TweetResource::collection($tweets_data);
+        }
+
         return Inertia::render('Tweets', [
-            'tweets' => Tweet::with('user:id,name')->latest()->get()
+            'tweets' => TweetResource::collection($tweets_data)
         ]);
     }
 
@@ -35,7 +42,7 @@ class TweetController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $is_validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'message' => 'required|string|min:1|max:255',
         ]);
 
         $request->user()->tweets()->create($is_validated);

@@ -10,6 +10,8 @@ defineProps(['tweets'])
 const form = useForm({
     message: '',
 })
+
+
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const form = useForm({
 
             <div class="mt-6 shadow-sm rounded-lg divide-y block">
                 <Tweet
-                    v-for="tweet in tweets"
+                    v-for="tweet in tweets.data"
                     :key="tweet.id"
                     :tweet="tweet"
                 />

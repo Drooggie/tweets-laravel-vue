@@ -3,6 +3,7 @@ import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import InputError from '@/Components/InputError.vue'
 import PrimaryButton from '@/Components/PrimaryButton.vue'
+import Comment from '@/Components/Comment.vue';
 import {useForm} from '@inertiajs/vue3'
 import {ref} from 'vue'
 import dayjs from 'dayjs'
@@ -60,9 +61,13 @@ const editing = ref(false);
             </form>
             <p class="mt-4 text-lg text-white pt-2">{{ tweet.message }}</p>
 
+
+
             <!-- likes  -->
             <div class="flex">
                 <div class="mt-5 text-white flex ml-auto justify-center">
+
+
                     <span class="fas fa-like">
                     <svg class="h-6 w-6"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></svg>
                     </span>
@@ -71,6 +76,10 @@ const editing = ref(false);
                     >{{ tweet.likes }}</span>
                 </div>
             </div>
+
+            <Comment class="flex-1">
+
+            </Comment >
 
         </div>
     </div>

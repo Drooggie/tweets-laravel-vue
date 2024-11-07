@@ -52,9 +52,13 @@ class TweetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tweet $tweet)
+    public function show(int $id): Response
     {
-        //
+        return Inertia::render('TweetShow', [
+            'tweet' => Tweet::with(['user' => function ($query) {
+                $query->select('id', 'name');
+            }])->findOrFail($id)
+        ]);
     }
 
     /**

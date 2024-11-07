@@ -24,6 +24,7 @@ Route::resource('tweets', TweetController::class)
     ->middleware(['auth', 'verified']);
 
 Route::get('tweets', [TweetController::class, 'index'])->middleware(['auth', 'verified'])->name('tweets');
+Route::get('/tweets/{id}', [TweetController::class, 'show'])->name('tweets.show');
 
 
 Route::resource('profilePage', ProfileTweetsController::class)
@@ -42,5 +43,6 @@ Route::middleware('auth')->group(function () {
 
 Route::post('tweets/{tweet}/comment', [CommentController::class, 'store'])->name('tweets.comments.store');
 Route::get('/comment/{tweet}', [CommentController::class, 'index']);
+Route::get('tweets/comment/{tweet}', [CommentController::class, 'index']);
 
 require __DIR__ . '/auth.php';

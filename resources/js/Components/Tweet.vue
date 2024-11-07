@@ -22,7 +22,7 @@ const editing = ref(false);
 
 
 <template>
-    <div class="p-6 flex space-x-2 blocks bg-black my-5 rounded-md">
+    <div class="p-6 flex space-x-2 blocks bg-black my-5 rounded-md text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-200 -scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
@@ -42,7 +42,7 @@ const editing = ref(false);
                         </button>
                     </template>
                     <template #content>
-                        <button class="block w-full px-4 py-2 text-left text-sm leading-5 text-white hover:bg-slate-800 focus:bg-slate-800 transition duration-150 ease-in-out" @click="editing = true">
+                        <button class="block w-full px-4 py-2 text-left text-sm leading-5 hover:bg-slate-800 focus:bg-slate-800 transition duration-150 ease-in-out" @click="editing = true">
                             Edit
                         </button>
                         <DropdownLink as="button" :href="route('tweets.destroy', tweet.id)" method="delete">
@@ -53,7 +53,7 @@ const editing = ref(false);
             </div>
 
             <form v-if="editing" @submit.prevent="form.put(route('tweets.update', tweet.id), {onSuccess: () => editing = false})">
-                <textarea v-model="form.message" class="mt-4 w-full text-white border-gray-600 bg-slate-900 focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm placeholder-white"></textarea>
+                <textarea v-model="form.message" class="mt-4 w-full border-gray-600 bg-slate-900 focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm placeholder-white"></textarea>
                 <div class="space-x-2">
                     <InputError :message="form.errors.message" class="mt-2" />
                     <PrimaryButton class="mt-4">Save</PrimaryButton>
@@ -61,13 +61,14 @@ const editing = ref(false);
                 </div>
             </form>
 
-            <p class="mt-4 text-lg text-white pt-2">{{ tweet.message }}</p>
-
-
+            <!--Message-->
+            <a :href="route('tweets.show', tweet.id)">
+                <p class="mt-4 text-lg pt-2">{{ tweet.message }}</p>
+            </a>
 
             <!-- likes  -->
             <div class="flex">
-                <div class="mt-5 text-white flex ml-auto justify-center">
+                <div class="mt-5 flex ml-auto justify-center">
 
 
                     <span class="fas fa-like">

@@ -15,6 +15,7 @@ const form = useForm({
 
 function showComments () {
     axios.get(`comment/${props.tweet.id}`).then((response) => {
+        console.log(response)
         comments.value = [];
         comments.value.push(...response.data)
     });

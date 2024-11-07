@@ -12,12 +12,11 @@ use App\Http\Resources\TweetResource;
 
 class TweetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $tweets_data = Tweet::orderBy('created_at', 'DESC')->with('user')->paginate(20);
+        $tweets_data = Tweet::with(['user' => function ($query) {
+            $query->select('id', 'name');
+        }])->latest()->paginate();
 
         if ($request->wantsJson()) {
             return TweetResource::collection($tweets_data);

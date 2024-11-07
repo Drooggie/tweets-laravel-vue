@@ -33,7 +33,7 @@ const editing = ref(false);
                     <small class="ml-2 text-sm text-gray-400">{{ dayjs(tweet.created_at).fromNow() }}</small>
                     <small v-if="tweet.created_at !== tweet.updated_at" class="text-sm text-gray-400">&middot; Edited</small>
                 </div>
-                <Dropdown v-if="tweet.user.id === $page.props.auth.user.id" >
+                <Dropdown v-if="tweet.user_id === $page.props.auth.user.id" >
                     <template #trigger>
                         <button>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-100" viewBox="0 0 20 20" fill="currentColor">
@@ -51,6 +51,7 @@ const editing = ref(false);
                     </template>
                 </Dropdown>
             </div>
+
             <form v-if="editing" @submit.prevent="form.put(route('tweets.update', tweet.id), {onSuccess: () => editing = false})">
                 <textarea v-model="form.message" class="mt-4 w-full text-white border-gray-600 bg-slate-900 focus:border-indigo-600 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm placeholder-white"></textarea>
                 <div class="space-x-2">
@@ -59,6 +60,7 @@ const editing = ref(false);
                     <button class="mt-4" @click="editing = false; form.reset(); form.clearErrors()">Cancel</button>
                 </div>
             </form>
+
             <p class="mt-4 text-lg text-white pt-2">{{ tweet.message }}</p>
 
 
@@ -77,7 +79,7 @@ const editing = ref(false);
                 </div>
             </div>
 
-            <Comment class="flex-1">
+            <Comment class="flex-1" :tweet="tweet">
 
             </Comment >
 

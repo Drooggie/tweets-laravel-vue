@@ -43,7 +43,7 @@ useIntersectionObserver(toLoad, ([{ isIntersecting }]) => {
                 <PrimaryButton class="mt-4">Chirp</PrimaryButton>
             </form>
 
-            <p>{{  }}</p>
+            <!-- <p>{{ tweets.data[0] }}</p> -->
 
             <div class="mt-6 divide-y">
                 <Tweet

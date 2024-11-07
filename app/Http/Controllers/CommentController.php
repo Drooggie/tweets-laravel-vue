@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Tweet;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -10,9 +12,11 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, Tweet $tweet)
     {
-        //
+        if ($request->wantsJson()) {
+            return Comment::where('tweet_id', $tweet->id)->latest()->get();
+        }
     }
 
     /**
@@ -26,9 +30,21 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Tweet $tweet): RedirectResponse
     {
-        //
+
+        $content = $request->validate([
+            'comment' => 'required|string|max:250',
+        ])['comment'];
+
+        $comment = new Comment();
+        $comment->tweet_id = $tweet->id;
+        $comment->content = $content;
+        $comment->save();
+
+        // $request->tweet()->comment()->create($is_validated);
+
+        return redirect(route('tweets'));
     }
 
     /**

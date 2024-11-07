@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\ProfileTweetsController;
 use App\Http\Controllers\TweetController;
@@ -38,5 +39,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('tweets/{tweet}/comment', [CommentController::class, 'store'])->name('tweets.comments.store');
+Route::get('/comment/{tweet}', [CommentController::class, 'index']);
 
 require __DIR__ . '/auth.php';

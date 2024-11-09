@@ -45,4 +45,6 @@ Route::post('tweets/{tweet}/comment', [CommentController::class, 'store'])->name
 Route::get('/comment/{tweet}', [CommentController::class, 'index']);
 Route::get('tweets/comment/{tweet}', [CommentController::class, 'index']);
 
+Route::get('explore/search', [ExploreController::class, 'search'])->name('explore.search');
+
 require __DIR__ . '/auth.php';

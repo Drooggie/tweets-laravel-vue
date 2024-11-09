@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Explore;
+use App\Models\Tweet;
+use App\Http\Resources\TweetResource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -12,9 +14,17 @@ class ExploreController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return Inertia::render('Explore');
+        $tweets_data = Tweet::with(['user' => function ($query) {
+            $query->select('id', 'name');
+        }])->latest()->paginate(10);
+
+        if ($request->wantsJson()) {
+            return TweetResource::collection($tweets_data);
+        }
+
+        return Inertia::render('Explore', ['tweets' => $tweets_data]);
     }
 
     /**
@@ -36,9 +46,15 @@ class ExploreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Explore $explore)
+    public function search(Request $request)
     {
-        //
+        $input = $request->input('search');
+
+        $tweets_data = Tweet::where('message', 'like', '%' . $input . '%')->with(['user' => function ($query) {
+            $query->select('id', 'name');
+        }])->latest()->paginate(10);
+
+        return Inertia::render('Explore', ['tweets' => $tweets_data]);
     }
 
     /**

@@ -20,4 +20,11 @@ class ProfileTweetsController extends Controller
             'tweets' => ProfileTweetResource::collection($tweets_id)
         ]);
     }
+
+    public function show(int $id)
+    {
+        return Inertia::render('ProfileTweets', [
+            'user' => User::with('tweets')->findOrFail($id)
+        ]);
+    }
 }

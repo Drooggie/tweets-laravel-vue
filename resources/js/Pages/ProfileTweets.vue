@@ -5,7 +5,7 @@ import ProfileHeaderComponent from '@/Components/ProfileHeaderComponent.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
 
-defineProps(['tweets'])
+defineProps(['user'])
 
 const form = useForm({
     message: '',
@@ -19,13 +19,14 @@ const form = useForm({
 
     <AuthenticatedLayout>
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-            <ProfileHeaderComponent>
+            <p>{{ user }}</p>
+            <ProfileHeaderComponent :user="user">
 
             </ProfileHeaderComponent>
 
             <div class="mt-6 shadow-sm rounded-lg divide-y block">
                 <Tweet
-                    v-for="tweet in tweets.data"
+                    v-for="tweet in user.tweets"
                     :key="tweet.id"
                     :tweet="tweet"
                 />

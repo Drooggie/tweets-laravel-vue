@@ -29,7 +29,7 @@ const editing = ref(false);
         <div class="flex-1">
             <div class="flex justify-between items-center">
                 <div>
-                    <span class="text-gray-100">{{ tweet.user.name }}</span>
+                    <!-- <a :href="route('profilePage.show', tweet.user.id)"><span class="text-gray-100">{{ tweet.user.name }}</span></a> -->
                     <small class="ml-2 text-sm text-gray-400">{{ dayjs(tweet.created_at).fromNow() }}</small>
                     <small v-if="tweet.created_at !== tweet.updated_at" class="text-sm text-gray-400">&middot; Edited</small>
                 </div>

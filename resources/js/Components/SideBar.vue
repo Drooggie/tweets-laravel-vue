@@ -33,7 +33,7 @@ const showingNavigationDropdown = ref(false);
                         Tweets
                     </NavLink>
                     <NavLink
-                        :href="route('profilePage.index')"
+                        :href="route('profilePage.show', 1)"
                         :active="route().current('profilePage.index')"
                     >
                         Profile

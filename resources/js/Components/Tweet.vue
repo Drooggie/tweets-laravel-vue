@@ -22,7 +22,7 @@ const editing = ref(false);
 
 
 <template>
-    <div class="p-6 flex space-x-2 blocks bg-black my-5 rounded-md text-white">
+    <div class="p-6 flex space-x-2 block bg-black my-5 rounded-md text-white">
         <img class="h-8 w-8 inline-block rounded-full mr-3" src="https://pbs.twimg.com/profile_images/1852369494250770432/fYUxsm9h_400x400.jpg" alt="something">
         <div class="flex-1">
             <div class="flex justify-between items-center">
@@ -33,7 +33,7 @@ const editing = ref(false);
                     <small class="ml-2 text-sm text-gray-400">{{ dayjs(tweet.created_at).fromNow() }}</small>
                     <small v-if="tweet.created_at !== tweet.updated_at" class="text-sm text-gray-400">&middot; Edited</small>
                 </div>
-                <Dropdown v-if="tweet.user_id === $page.props.auth.user.id" >
+                <Dropdown v-if="tweet.user_id === $page.props.auth.user.id">
                     <template #trigger>
                         <button>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-100" viewBox="0 0 20 20" fill="currentColor">

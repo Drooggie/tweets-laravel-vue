@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,5 +60,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function bioUpdate(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'bio' => 'nullable|string|min:1|max:255'
+        ]);
+
+        $request->user()->fill($validated);
+        $request->user()->save();
+
+        return redirect(route('profilePage.show', Auth::id()));
     }
 }

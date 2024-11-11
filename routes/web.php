@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profileEdit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::put('/profile/bio', [ProfileController::class, 'bioUpdate'])->name('profile.bioUpdate');
+Route::put('/profile/image', [ProfileController::class, 'imageUpdate'])->name('profile.imageUpdate');
 
 Route::post('tweets/{tweet}/comment', [CommentController::class, 'store'])->name('tweets.comments.store');
 Route::get('/comment/{tweet}', [CommentController::class, 'index']);

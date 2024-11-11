@@ -5,9 +5,13 @@ import { ref } from 'vue';
 
 defineProps(['user'])
 const bioEditing = ref(false)
+const isModalVisible = ref(false)
 
+// const form = useForm({
+//     bio: '',
+// })
 const form = useForm({
-    bio: '',
+    image: null,
 })
 
 </script>
@@ -16,12 +20,32 @@ const form = useForm({
     <div class="w-auto bg-black text-white block mb-2">
         <!--Header-->
         <div class="w-auto h-44 bg-gray-500 relative">
-            <img class="h-36 w-36 absolute top-28 left-10 rounded-full" src="https://pbs.twimg.com/profile_images/1852369494250770432/fYUxsm9h_400x400.jpg" alt="something">
+            <button @click="isModalVisible = true">
+                <img class="h-36 w-36 absolute top-28 left-10 rounded-full" src="https://pbs.twimg.com/profile_images/1852369494250770432/fYUxsm9h_400x400.jpg" alt="something">
+            </button>
             <div class="absolute" style="right: 30px; bottom: -60px;">
                 <PrimaryButton :href="route('profile.edit')" class="bg-slate-900">
                     Edit
                 </PrimaryButton>
             </div>
+            <Modal v-if="isModalVisible">
+                <div class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center">
+                    <div class="block bg-slate-900 px-10 py-8 rounded-md shadow-2xl">
+                        <h2 class="text-lg font-semibold">Chage profile picture</h2>
+                        <form @submit.prevent="form.put(route('profile.imageUpdate', user.id), {onSuccess: () => {isModalVisible = false}})">
+                            <div class="my-6">
+                                <input type="file" @input="form.avatar = $event.target.files[0]" />
+                                <button type="submit" class="text-sm btn btn-secondary mt-4 bg-black py-2 px-4 rounded-md">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                        <button @click="isModalVisible = false" class="text-sm btn btn-secondary mt-4 bg-black py-2 px-4 rounded-md">
+                        Close Modal
+                        </button>
+                    </div>
+                </div>
+            </Modal>
         </div>
 
         <!-- Main info -->

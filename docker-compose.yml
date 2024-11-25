@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: tweets-db
+    ports:
+      - 3400:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: tweets
+      MYSQL_PASSWORD: secret
+    volumes:
+      - /mysql:/var/lib/mysql
+    networks:
+      - tweets_network
+
+  app:
+    build:
+      dockerfile: Dockerfile
+    container_name: tweets_app
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: tweets
+      DB_USERNAME: root
+      DB_PASSWORD: secret
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    networks:
+      - tweets_network
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:alpine
+    container_name: tweets_nginx
+    volumes:
+      - ./src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "8400:80"
+    networks:
+      - tweets_network
+    depends_on:
+      - app
+  node:
+    image: node:latest
+    container_name: tweets_node
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    command: npm install && npm run dev
+    networks:
+      - tweets_network
+
+volumes:
+  mysql:
+
+
+networks:
+  tweets_network:

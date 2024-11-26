@@ -15,7 +15,7 @@ class TweetController extends Controller
     public function index(Request $request)
     {
         $tweets_data = Tweet::with(['user' => function ($query) {
-            $query->select('id', 'name');
+            $query->select('id', 'name', 'image');
         }])->latest()->paginate();
 
         if ($request->wantsJson()) {

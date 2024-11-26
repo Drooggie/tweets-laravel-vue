@@ -17,6 +17,11 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'bio' => ['required', 'string', 'max:255'],
+            'image' => [
+                'required',
+                Rule::dimensions()->maxWidth(500)->maxHeight(500)
+            ],
             'email' => [
                 'required',
                 'string',

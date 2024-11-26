@@ -32,7 +32,6 @@ useIntersectionObserver(toLoad, ([{ isIntersecting }]) => {
 
     <AuthenticatedLayout>
         <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- <p>{{ tweets }}</p> -->
             <form @submit.prevent="form.post(route('tweets.store'), { onSuccess: () => form.reset() })">
                 <textarea
                 v-model="form.message"
@@ -43,13 +42,12 @@ useIntersectionObserver(toLoad, ([{ isIntersecting }]) => {
                 <PrimaryButton class="mt-4">Chirp</PrimaryButton>
             </form>
 
-            <!-- <p>{{ tweets.data[0] }}</p> -->
-
             <div class="mt-6 divide-y">
                 <Tweet
                     v-for="tweet in tweetState"
                     :key="tweet.data"
                     :tweet="tweet"
+                    :user="tweet.user"
                 />
                 <div ref="toLoad"></div>
             </div>

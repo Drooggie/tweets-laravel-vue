@@ -30,8 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profileEdit', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profileEdit', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::put('/profile/bio', [ProfileController::class, 'bioUpdate'])->name('profile.bioUpdate');
-Route::put('/profile/image', [ProfileController::class, 'imageUpdate'])->name('profile.imageUpdate');
+Route::patch('/profile/imageBioUpdate', [ProfileController::class, 'imageBioUpdate'])->name('profile.imageBioUpdate');
 
 Route::post('tweets/{tweet}/comment', [CommentController::class, 'store'])->name('tweets.comments.store');
 Route::get('/comment/{tweet}', [CommentController::class, 'index']);

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Models\User;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,7 +38,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profilePage');
     }
 
     /**
@@ -63,31 +62,17 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function bioUpdate(Request $request)
+    public function imageBioUpdate(Request $request)
     {
-        $validated = $request->validate([
-            'bio' => 'nullable|string|min:1|max:255'
-        ]);
+        $validated = ($request->validate([
+            "bio" => ['required', 'string', 'max:255'],
+            "image" => ['required']
+        ]));
+
 
         $request->user()->fill($validated);
         $request->user()->save();
 
-        return redirect(route('profilePage.show', Auth::id()));
-    }
-
-    public function imageUpdate(Request $request, User $user)
-    {
-        // Storage::disk('local')->put('', '');
-        // $request->file('image')->store('public');
-
-        dd($request);
-        $imagePath = Storage::putFile('image', $request->file('image'));
-
-        $request->user()->fill([
-            'image' => $imagePath,
-        ]);
-        $request->user()->save();
-
-        return redirect(route('profilePage.show', Auth::id()));
+        return redirect(route('tweets'));
     }
 }
